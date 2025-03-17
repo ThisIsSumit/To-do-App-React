@@ -3,7 +3,15 @@ import React, { useState } from 'react'
 export default function AddTodo(props) {
     const [title,setTitle]=useState("");
     const [desc,setDesc]= useState("") 
-    const submit=()=>{
+    const submit=(e)=>{
+        e.preventDefault();
+        if(!title || !desc){
+            alert("title or description cannot be blank")
+        }
+       props.addTodo(title,desc)
+       setTitle("")
+       setDesc("")
+
 
     }
   return ( 
@@ -11,13 +19,13 @@ export default function AddTodo(props) {
     <h3>Add a Todo</h3>
       <form onSubmit={submit}>
   <div className="mb-3">
-    <label for="title" className="form-label">Todo Title</label>
+    <label htmlFor="title" className="form-label">Todo Title</label>
     <input type="text"  value={title}
      onChange={(e)=>setTitle(e.target.value)} 
       className="form-control" id="title" aria-describedby="emailHelp"/>
   </div>
   <div className="mb-3">
-    <label for="desc" className="form-label">Todo description</label>
+    <label htmlFor="desc" className="form-label">Todo description</label>
     <input type="text" value={desc} 
      onChange={(e)=>setDesc(e.target.value)} 
     className="form-control" id="desc"/>
